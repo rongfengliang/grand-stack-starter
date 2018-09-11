@@ -1,4 +1,4 @@
-FROM neo4j:3.4
+FROM neo4j:3.4.5
 
 ENV NEO4J_AUTH=neo4j/letmein
 
@@ -10,6 +10,7 @@ ENV GRAPHQL_VERSION 3.4.0.1
 ENV GRAPHQL_URI https://github.com/neo4j-graphql/neo4j-graphql/releases/download/${GRAPHQL_VERSION}/neo4j-graphql-${GRAPHQL_VERSION}.jar
 RUN wget -P /var/lib/neo4j/plugins ${GRAPHQL_URI}
 
+RUN echo 'dbms.unmanaged_extension_classes=org.neo4j.graphql=/graphql' >> /var/lib/neo4j/conf/neo4j.conf
 EXPOSE 7474 7473 7687
 
 CMD ["neo4j"]
